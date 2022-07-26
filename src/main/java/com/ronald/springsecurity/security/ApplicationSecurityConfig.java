@@ -29,8 +29,8 @@ public class ApplicationSecurityConfig  {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authz) -> authz
-                        .antMatchers("/", "index", "/css/*", "/js/*")
-                        .permitAll()
+                        .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
+                        .antMatchers("/api/**").hasRole(STUDENT.name())
                         .anyRequest()
                         .authenticated()
                 )

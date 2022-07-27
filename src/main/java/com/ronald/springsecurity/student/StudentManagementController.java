@@ -1,5 +1,7 @@
 package com.ronald.springsecurity.student;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -15,24 +17,29 @@ public class StudentManagementController {
             new Student(3, "Anna Smith")
     );
 
+    private final Logger LOGGER = LoggerFactory.getLogger(StudentManagementController.class);
+
     @GetMapping
     public List<Student> getAllStudents() {
+        LOGGER.info("Inside get all students");
         return STUDENTS;
     }
 
     @PostMapping
     public void registerNewStudent(@RequestBody Student student) {
+        LOGGER.info("Inside register new student");
         System.out.println(student);
     }
 
     @DeleteMapping(path = "{studentId}")
     public void deleteStudent(@PathVariable("studentId") Integer studentId) {
+        LOGGER.info("Inside delete student");
         System.out.println(studentId);
     }
 
     @PutMapping(path = "{studentId}")
     public void updateStudent(@PathVariable("studentId") Integer studentId, @RequestBody Student student) {
-        System.out.printf("%s %s%n", studentId, student);
+        LOGGER.info(String.format("Inside put student %s %s%n", studentId, student));
     }
 
 }
